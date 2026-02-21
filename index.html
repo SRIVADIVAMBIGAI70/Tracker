@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Habit Tracker - Streak System</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">⚡ Habit Tracker</div>
+        <button class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+          <li><a href="#" class="nav-link" data-page="add">Add Habit</a></li>
+          <li><a href="#" class="nav-link" data-page="stats">Stats</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page active">
+      <div class="container">
+        <h1 class="page-title">Your Habits</h1>
+        <div id="habits-container" class="habits-grid"></div>
+        <div id="empty-state" class="empty-state">
+          <div class="empty-icon">📋</div>
+          <p>No habits yet. Start building your streaks!</p>
+          <button class="btn-primary" onclick="navigateTo('add')">Add Your First Habit</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Habit Page -->
+    <div id="add-page" class="page">
+      <div class="container">
+        <h1 class="page-title">Create New Habit</h1>
+        <div class="form-container">
+          <form id="habit-form">
+            <div class="form-group">
+              <label for="habit-name">Habit Name *</label>
+              <input
+                type="text"
+                id="habit-name"
+                class="form-input"
+                placeholder="e.g., Morning Exercise"
+                minlength="3"
+                required
+              />
+              <span class="error-message" id="name-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="habit-category">Category</label>
+              <select id="habit-category" class="form-input">
+                <option value="Health">Health</option>
+                <option value="Productivity">Productivity</option>
+                <option value="Learning">Learning</option>
+                <option value="Mindfulness">Mindfulness</option>
+                <option value="Social">Social</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="habit-frequency">Frequency</label>
+              <select id="habit-frequency" class="form-input">
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-primary btn-submit">Create Habit</button>
+          </form>
+          <div id="success-message" class="success-message">✓ Habit created successfully!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Page -->
+    <div id="stats-page" class="page">
+      <div class="container">
+        <h1 class="page-title">Your Statistics</h1>
+
+        <!-- Stats Summary Cards -->
+        <div class="stats-summary">
+          <div class="stat-card">
+            <div class="stat-value" id="total-habits">0</div>
+            <div class="stat-label">Total Habits</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="longest-streak">0</div>
+            <div class="stat-label">Longest Streak</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="completion-rate">0%</div>
+            <div class="stat-label">Completion Rate</div>
+          </div>
+        </div>
+
+        <!-- Carousel -->
+        <div class="carousel-container">
+          <h2 class="carousel-title">Weekly Progress</h2>
+          <div class="carousel">
+            <button class="carousel-btn carousel-prev" id="carousel-prev">‹</button>
+            <div class="carousel-track" id="carousel-track"></div>
+            <button class="carousel-btn carousel-next" id="carousel-next">›</button>
+          </div>
+          <div class="carousel-dots" id="carousel-dots"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="habit-modal" class="modal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <button class="modal-close" id="modal-close">×</button>
+        <h2 class="modal-title" id="modal-habit-name"></h2>
+        <div class="modal-body">
+          <div class="modal-info">
+            <div class="modal-info-item">
+              <span class="modal-label">Category:</span>
+              <span class="modal-value" id="modal-category"></span>
+            </div>
+            <div class="modal-info-item">
+              <span class="modal-label">Current Streak:</span>
+              <span class="modal-value streak-value" id="modal-streak">0 days</span>
+            </div>
+            <div class="modal-info-item">
+              <span class="modal-label">Frequency:</span>
+              <span class="modal-value" id="modal-frequency"></span>
+            </div>
+            <div class="modal-info-item">
+              <span class="modal-label">Last Completed:</span>
+              <span class="modal-value" id="modal-last-completed">Never</span>
+            </div>
+          </div>
+          <button class="btn-delete" id="delete-habit-btn">Delete Habit</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
